@@ -1,6 +1,6 @@
 {
   "name": "gulp-fest",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Gulp plugin for fest templates compiling",
   "main": "index.js",
   "scripts": {
