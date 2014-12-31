@@ -1,0 +1,26 @@
+{
+  "name": "gulp-fest",
+  "version": "1.0.0",
+  "description": "Gulp plugin for fest templates compiling",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DmitryDorofeev/gulp-fest.git"
+  },
+  "keywords": [
+    "gulpplugin"
+  ],
+  "author": "Dmitry Dorofeev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DmitryDorofeev/gulp-fest/issues"
+  },
+  "homepage": "https://github.com/DmitryDorofeev/gulp-fest",
+  "dependencies": {
+    "fest": "^0.8.2",
+    "map-stream": "0.0.5"
+  }
+}
