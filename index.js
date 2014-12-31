@@ -1,5 +1,5 @@
-var fest = require('fest'),
-	map   = require('map-stream');
+var fest = require('fest');
+var through = require('through2');
 
 var festTask = function () {
 	function makefest(file, opts, cb) {
@@ -16,7 +16,7 @@ var festTask = function () {
 		cb(null, file);
 	}
 
-	return map(makefest);
+	return through.obj(makefest);
 };
 
 module.exports = festTask;
