@@ -1,0 +1,97 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'publish', './', '--tag', 'beta' ]
+2 info using npm@2.1.6
+3 info using node@v0.10.33
+4 verbose node symlink /usr/local/bin/node
+5 verbose publish [ './' ]
+6 silly cache add args [ './', null ]
+7 verbose cache add spec ./
+8 silly cache add parsed spec { raw: './',
+8 silly cache add   scope: null,
+8 silly cache add   name: null,
+8 silly cache add   rawSpec: './',
+8 silly cache add   spec: '/Users/dmitrydorofeev/dev/gulp-fest',
+8 silly cache add   type: 'directory' }
+9 verbose tar pack [ '/Users/dmitrydorofeev/.npm/gulp-fest/0.1.0/package.tgz',
+9 verbose tar pack   '/Users/dmitrydorofeev/dev/gulp-fest' ]
+10 verbose tarball /Users/dmitrydorofeev/.npm/gulp-fest/0.1.0/package.tgz
+11 verbose folder /Users/dmitrydorofeev/dev/gulp-fest
+12 info prepublish gulp-fest@0.1.0
+13 verbose addLocalTarball adding from inside cache /Users/dmitrydorofeev/.npm/gulp-fest/0.1.0/package.tgz
+14 silly cache afterAdd gulp-fest@0.1.0
+15 verbose afterAdd /Users/dmitrydorofeev/.npm/gulp-fest/0.1.0/package/package.json not in flight; writing
+16 verbose afterAdd /Users/dmitrydorofeev/.npm/gulp-fest/0.1.0/package/package.json written
+17 silly publish { name: 'gulp-fest',
+17 silly publish   version: '0.1.0',
+17 silly publish   description: 'Gulp plugin for fest templates compiling',
+17 silly publish   main: 'index.js',
+17 silly publish   scripts: { test: 'echo "Error: no test specified" && exit 1' },
+17 silly publish   repository:
+17 silly publish    { type: 'git',
+17 silly publish      url: 'https://github.com/DmitryDorofeev/gulp-fest.git' },
+17 silly publish   keywords: [ 'gulpplugin' ],
+17 silly publish   author: { name: 'Dmitry Dorofeev' },
+17 silly publish   license: 'ISC',
+17 silly publish   bugs: { url: 'https://github.com/DmitryDorofeev/gulp-fest/issues' },
+17 silly publish   homepage: 'https://github.com/DmitryDorofeev/gulp-fest',
+17 silly publish   dependencies: { fest: '^0.8.2', 'map-stream': '0.0.5' },
+17 silly publish   readme: '#Gulp Fest\n\nGulp plugin for compiling [fest](https://github.com/mailru/fest) templates\n',
+17 silly publish   readmeFilename: 'readme.md',
+17 silly publish   gitHead: '8ba424d911f363855baa245cd31a52cadd039ac3',
+17 silly publish   _id: 'gulp-fest@0.1.0',
+17 silly publish   _shasum: 'bed1f61ae9fd8cfe3e8697de56a0fd64f85db25b',
+17 silly publish   _from: '.' }
+18 verbose mapToRegistry name gulp-fest
+19 verbose mapToRegistry uri https://registry.npmjs.org/gulp-fest
+20 verbose publish registryBase https://registry.npmjs.org/
+21 verbose request on initialization, where is /gulp-fest
+22 verbose request after pass 1, where is /gulp-fest
+23 verbose request url raw /gulp-fest
+24 verbose request resolving registry [ 'https://registry.npmjs.org/', './gulp-fest' ]
+25 verbose request after pass 2, where is https://registry.npmjs.org/gulp-fest
+26 verbose request sending authorization for write operation
+27 info attempt registry request try #1 at 14:37:23
+28 verbose request id 25147ac51202f85f
+29 http request PUT https://registry.npmjs.org/gulp-fest
+30 http 403 https://registry.npmjs.org/gulp-fest
+31 verbose headers { date: 'Wed, 31 Dec 2014 11:37:23 GMT',
+31 verbose headers   server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+31 verbose headers   'content-type': 'application/json',
+31 verbose headers   'cache-control': 'max-age=60',
+31 verbose headers   'content-length': '2449',
+31 verbose headers   'accept-ranges': 'bytes',
+31 verbose headers   via: '1.1 varnish',
+31 verbose headers   'x-served-by': 'cache-fra1231-FRA',
+31 verbose headers   'x-cache': 'MISS',
+31 verbose headers   'x-cache-hits': '0',
+31 verbose headers   'x-timer': 'S1420025843.515211,VS0,VE183',
+31 verbose headers   'keep-alive': 'timeout=10, max=50',
+31 verbose headers   connection: 'Keep-Alive' }
+32 error publish Failed PUT 403
+33 verbose stack Error: forbidden cannot modify pre-existing version: 0.1.0
+33 verbose stack old={"name":"gulp-fest","version":"0.1.0","description":"Gulp plugin for fest templates compiling","main":"index.js","scripts":{"test":"echo \"Error: no test specified\" && exit 1"},"repository":{"type":"git","url":"https://github.com/DmitryDorofeev/gulp-fest.git"},"keywords":["gulpplugin"],"author":{"name":"Dmitry Dorofeev"},"license":"ISC","bugs":{"url":"https://github.com/DmitryDorofeev/gulp-fest/issues"},"homepage":"https://github.com/DmitryDorofeev/gulp-fest","dependencies":{"fest":"^0.8.2","map-stream":"0.0.5"},"gitHead":"fa25d50a0cb4cdb351960d8622ce373d65cf5fff","_id":"gulp-fest@0.1.0","_shasum":"6986d49fd772ee993ea6ddd7db44cb62a7893025","_from":".","_npmVersion":"2.1.6","_nodeVersion":"0.10.33","_npmUser":{"name":"dmitrydorofeev","email":"me@dmitrydorofeev.ru"},"maintainers":[{"name":"dmitrydorofeev","email":"me@dmitrydorofeev.ru"}],"dist":{"shasum":"6986d49fd772ee993ea6ddd7db44cb62a7893025","tarball":"http://registry.npmjs.org/gulp-fest/-/gulp-fest-0.1.0.tgz"}}
+33 verbose stack new={"name":"gulp-fest","version":"0.1.0","description":"Gulp plugin for fest templates compiling","main":"index.js","scripts":{"test":"echo \"Error: no test specified\" && exit 1"},"repository":{"type":"git","url":"https://github.com/DmitryDorofeev/gulp-fest.git"},"keywords":["gulpplugin"],"author":{"name":"Dmitry Dorofeev"},"license":"ISC","bugs":{"url":"https://github.com/DmitryDorofeev/gulp-fest/issues"},"homepage":"https://github.com/DmitryDorofeev/gulp-fest","dependencies":{"fest":"^0.8.2","map-stream":"0.0.5"},"readme":"#Gulp Fest\u000a\u000aGulp plugin for compiling [fest](https://github.com/mailru/fest) templates\u000a","readmeFilename":"readme.md","gitHead":"8ba424d911f363855baa245cd31a52cadd039ac3","_id":"gulp-fest@0.1.0","_shasum":"bed1f61ae9fd8cfe3e8697de56a0fd64f85db25b","_from":".","_npmVersion":"2.1.6","_nodeVersion":"0.10.33","_npmUser":{"name":"dmitrydorofeev","email":"me@dmitrydorofeev.ru"},"maintainers":[{"name":"dmitrydorofeev","email":"me@dmitrydorofeev.ru"}],"dist":{"shasum":"bed1f61ae9fd8cfe3e8697de56a0fd64f85db25b","tarball":"http://registry.npmjs.org/gulp-fest/-/gulp-fest-0.1.0.tgz"}}: gulp-fest
+33 verbose stack     at RegClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:260:14)
+33 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:197:65)
+33 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:364:22)
+33 verbose stack     at Request.emit (events.js:98:17)
+33 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1318:14)
+33 verbose stack     at Request.emit (events.js:117:20)
+33 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1266:12)
+33 verbose stack     at IncomingMessage.emit (events.js:117:20)
+33 verbose stack     at _stream_readable.js:943:16
+33 verbose stack     at process._tickCallback (node.js:419:13)
+34 verbose statusCode 403
+35 verbose pkgid gulp-fest
+36 verbose cwd /Users/dmitrydorofeev/dev/gulp-fest
+37 error Darwin 14.0.0
+38 error argv "node" "/usr/local/bin/npm" "publish" "./" "--tag" "beta"
+39 error node v0.10.33
+40 error npm  v2.1.6
+41 error code E403
+42 error forbidden cannot modify pre-existing version: 0.1.0
+42 error old={"name":"gulp-fest","version":"0.1.0","description":"Gulp plugin for fest templates compiling","main":"index.js","scripts":{"test":"echo \"Error: no test specified\" && exit 1"},"repository":{"type":"git","url":"https://github.com/DmitryDorofeev/gulp-fest.git"},"keywords":["gulpplugin"],"author":{"name":"Dmitry Dorofeev"},"license":"ISC","bugs":{"url":"https://github.com/DmitryDorofeev/gulp-fest/issues"},"homepage":"https://github.com/DmitryDorofeev/gulp-fest","dependencies":{"fest":"^0.8.2","map-stream":"0.0.5"},"gitHead":"fa25d50a0cb4cdb351960d8622ce373d65cf5fff","_id":"gulp-fest@0.1.0","_shasum":"6986d49fd772ee993ea6ddd7db44cb62a7893025","_from":".","_npmVersion":"2.1.6","_nodeVersion":"0.10.33","_npmUser":{"name":"dmitrydorofeev","email":"me@dmitrydorofeev.ru"},"maintainers":[{"name":"dmitrydorofeev","email":"me@dmitrydorofeev.ru"}],"dist":{"shasum":"6986d49fd772ee993ea6ddd7db44cb62a7893025","tarball":"http://registry.npmjs.org/gulp-fest/-/gulp-fest-0.1.0.tgz"}}
+42 error new={"name":"gulp-fest","version":"0.1.0","description":"Gulp plugin for fest templates compiling","main":"index.js","scripts":{"test":"echo \"Error: no test specified\" && exit 1"},"repository":{"type":"git","url":"https://github.com/DmitryDorofeev/gulp-fest.git"},"keywords":["gulpplugin"],"author":{"name":"Dmitry Dorofeev"},"license":"ISC","bugs":{"url":"https://github.com/DmitryDorofeev/gulp-fest/issues"},"homepage":"https://github.com/DmitryDorofeev/gulp-fest","dependencies":{"fest":"^0.8.2","map-stream":"0.0.5"},"readme":"#Gulp Fest\u000a\u000aGulp plugin for compiling [fest](https://github.com/mailru/fest) templates\u000a","readmeFilename":"readme.md","gitHead":"8ba424d911f363855baa245cd31a52cadd039ac3","_id":"gulp-fest@0.1.0","_shasum":"bed1f61ae9fd8cfe3e8697de56a0fd64f85db25b","_from":".","_npmVersion":"2.1.6","_nodeVersion":"0.10.33","_npmUser":{"name":"dmitrydorofeev","email":"me@dmitrydorofeev.ru"},"maintainers":[{"name":"dmitrydorofeev","email":"me@dmitrydorofeev.ru"}],"dist":{"shasum":"bed1f61ae9fd8cfe3e8697de56a0fd64f85db25b","tarball":"http://registry.npmjs.org/gulp-fest/-/gulp-fest-0.1.0.tgz"}}: gulp-fest
+43 error If you need help, you may report this error at:
+43 error     <http://github.com/npm/npm/issues>
+44 verbose exit [ 1, true ]
