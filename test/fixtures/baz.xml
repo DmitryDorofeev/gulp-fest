@@ -1,0 +1,6 @@
+<fest:template xmlns:fest="http://fest.mail.ru">
+    <fest:get name="block">Grunt</fest:get>
+    <fest:set name="block">
+        Hello,<fest:space /><fest:value>params</fest:value>!
+    </fest:set>
+</fest:template>

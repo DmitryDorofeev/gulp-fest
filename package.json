@@ -4,7 +4,7 @@
   "description": "Gulp plugin for fest templates compiling",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test/main.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,12 @@
   "homepage": "https://github.com/DmitryDorofeev/gulp-fest",
   "dependencies": {
     "fest": "^0.8.2",
+    "gulp-util": "^3.0.7",
+    "lodash.assign": "^3.2.0",
     "through2": "^0.6.3"
+  },
+  "devDependencies": {
+    "mocha": "^2.3.4",
+    "should": "^8.0.2"
   }
 }
