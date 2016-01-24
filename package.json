@@ -1,10 +1,10 @@
 {
   "name": "gulp-fest",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Gulp plugin for fest templates compiling",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test/main.js"
   },
   "repository": {
     "type": "git",
@@ -14,6 +14,13 @@
     "gulpplugin"
   ],
   "author": "Dmitry Dorofeev",
+  "contributors": [
+    {
+      "name": "Igor Frolov",
+      "email": "imrolov@gmail.com",
+      "url": "https://github.com/warmrobot"
+    }
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/DmitryDorofeev/gulp-fest/issues"
@@ -21,6 +28,12 @@
   "homepage": "https://github.com/DmitryDorofeev/gulp-fest",
   "dependencies": {
     "fest": "^0.8.2",
-    "through2": "^0.6.3"
+    "gulp-util": "^3.0.7",
+    "lodash.assign": "^4.0.0",
+    "through2": "^2.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.3.4",
+    "should": "^8.2.0"
   }
 }

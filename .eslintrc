@@ -1,0 +1,14 @@
+{
+  "extends": "airbnb/base",
+  "rules": {
+    "indent": [2, "tab", {"SwitchCase": 0, "VariableDeclarator": 1}],
+    "eqeqeq": 0,
+    "comma-dangle": 0,
+    "quote-props": 0,
+    "no-else-return": 0,
+    "no-param-reassign": 0,
+    "space-infix-ops": [2, {"int32Hint": true}],
+    "no-unused-expressions": [2, {"allowShortCircuit": true}],
+    "object-curly-spacing": [2, "never"]
+  }
+}
