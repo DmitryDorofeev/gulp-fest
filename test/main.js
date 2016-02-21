@@ -8,70 +8,74 @@ var gutil = require('gulp-util');
 require('mocha');
 
 describe('gulp-fest', function() {
-    it('should compile XML to JS', function (done) {
-        var stream = fest();
+	it('should compile XML to JS', function (done) {
+		var stream = fest();
 
-        stream.on('data', function (file) {
-            should.exist(file);
-            should.exist(file.contents);
-            String(file.contents).should.equal(
-                fs.readFileSync('test/expected/01-default/foo.js', 'utf8')
-            );
-            done();
-        });
+		stream.on('data', function (file) {
+			should.exist(file);
+			should.exist(file.contents);
+			String(file.contents).should.equal(
+				fs.readFileSync('test/expected/01-default/foo.js', 'utf8')
+			);
+			done();
+		});
 
-        stream.write(new gutil.File({
-            base: 'test/fixtures',
-            cwd: 'test/',
-            path: 'test/fixtures/foo.xml',
-            contents: fs.readFileSync('test/fixtures/foo.xml')
-        }));
-    });
-
-
-    it('should compile to readable result also', function (done) {
-        var stream = fest({
-            beautify: true
-        });
-
-        stream.on('data', function (file) {
-            should.exist(file);
-            should.exist(file.contents);
-            String(file.contents).should.equal(
-                fs.readFileSync('test/expected/02-beautify/foo.js', 'utf8')
-            );
-            done();
-        });
-
-        stream.write(new gutil.File({
-            base: 'test/fixtures',
-            cwd: 'test/',
-            path: 'test/fixtures/foo.xml',
-            contents: fs.readFileSync('test/fixtures/foo.xml')
-        }));
-    });
+		stream.write(new gutil.File({
+			base: 'test/fixtures',
+			cwd: 'test/',
+			path: 'test/fixtures/foo.xml',
+			contents: fs.readFileSync('test/fixtures/foo.xml')
+		}));
+	});
 
 
-    it('should have debug option', function (done) {
-        var stream = fest({
-            beautify: true,
-            debug: true
-        });
+	it('should compile to readable result also', function (done) {
+		var stream = fest({
+			compile: {
+				beautify: true
+			}
+		});
 
-        stream.on('data', function (file) {
-            should.exist(file);
-            should.exist(file.contents);
-            String(file.contents).should.equal(
-                fs.readFileSync('test/expected/03-debug/foo.js', 'utf8')
-            );
-            done();
-        });
+		stream.on('data', function (file) {
+			should.exist(file);
+			should.exist(file.contents);
+			String(file.contents).should.equal(
+				fs.readFileSync('test/expected/02-beautify/foo.js', 'utf8')
+			);
+			done();
+		});
 
-        stream.write(new gutil.File({
-            base: 'test/fixtures',
-            cwd: 'test/',
-            path: 'test/fixtures/foo.xml',
-            contents: fs.readFileSync('test/fixtures/foo.xml')
-        }));
-    });
+		stream.write(new gutil.File({
+			base: 'test/fixtures',
+			cwd: 'test/',
+			path: 'test/fixtures/foo.xml',
+			contents: fs.readFileSync('test/fixtures/foo.xml')
+		}));
+	});
+
+
+	it('should have debug option', function (done) {
+		var stream = fest({
+			compile: {
+				beautify: true,
+				debug: true
+			}
+		});
+
+		stream.on('data', function (file) {
+			should.exist(file);
+			should.exist(file.contents);
+			String(file.contents).should.equal(
+				fs.readFileSync('test/expected/03-debug/foo.js', 'utf8')
+			);
+			done();
+		});
+
+		stream.write(new gutil.File({
+			base: 'test/fixtures',
+			cwd: 'test/',
+			path: 'test/fixtures/foo.xml',
+			contents: fs.readFileSync('test/fixtures/foo.xml')
+		}));
+	});
 });

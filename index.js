@@ -10,7 +10,10 @@ var path = require('path');
 
 
 module.exports = function (options) {
-	var opts = assign({}, options);
+	var opts = assign({
+		require: 'fest',
+		ext: '.js'
+	}, options);
 
 	function transform (file, enc, cb) {
 		if (file.isStream()) {
@@ -21,16 +24,18 @@ module.exports = function (options) {
 			return cb(null, file);
 		}
 
-		if (path.extname(file.path) === '.js') {
-			return cb(null, file);
+		var name = opts.name;
+
+		if (name === true) {
+			name = file.stem;
 		}
 
-		var compiled = fest.compile(file.path, opts);
+		var compiled = fest.compile(file.path, assign({}, opts.compile), name);
 		replaceExtension(compiled, file, cb);
 	}
 
 	function replaceExtension (output, file, cb) {
-		file.path = file.path.replace('.xml', '.js');
+		file.extname = opts.ext;
 		file.contents = new Buffer(output);
 		cb(null, file);
 	}
