@@ -124,4 +124,27 @@ describe('gulp-fest', function() {
 			contents: fs.readFileSync('test/fixtures/foo.xml')
 		}));
 	});
+
+
+	it('should create custom extension', function (done) {
+		var stream = fest({
+			ext: 'tmpl.js'
+		});
+
+		stream.on('data', function (file) {
+			should.exist(file);
+			should.exist(file.contents);
+			String(file.contents).should.equal(
+				fs.readFileSync('test/expected/06-custom-extension/foo.tmpl.js', 'utf8')
+			);
+			done();
+		});
+
+		stream.write(new gutil.File({
+			base: 'test/fixtures',
+			cwd: 'test/',
+			path: 'test/fixtures/foo.xml',
+			contents: fs.readFileSync('test/fixtures/foo.xml')
+		}));
+	});
 });
