@@ -1,11 +1,14 @@
 {
   "name": "gulp-fest",
-  "version": "1.0.5",
+  "version": "2.0.0",
   "description": "Gulp plugin for fest templates compiling",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/main.js"
+    "test": "mocha"
   },
+  "files": [
+    "test/main.js"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/DmitryDorofeev/gulp-fest.git"
@@ -29,11 +32,11 @@
   "dependencies": {
     "fest": "^0.8.2",
     "gulp-util": "^3.0.7",
-    "lodash.assign": "^4.0.0",
-    "through2": "^2.0.0"
+    "lodash.assign": "^4.0.3",
+    "through2": "^2.0.1"
   },
   "devDependencies": {
-    "mocha": "^2.3.4",
-    "should": "^8.2.0"
+    "mocha": "^2.4.5",
+    "should": "^8.2.2"
   }
 }
