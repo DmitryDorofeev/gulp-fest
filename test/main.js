@@ -78,4 +78,27 @@ describe('gulp-fest', function() {
 			contents: fs.readFileSync('test/fixtures/foo.xml')
 		}));
 	});
+
+
+	it('should create function declaration with name of file stem', function (done) {
+		var stream = fest({
+			name: true
+		});
+
+		stream.on('data', function (file) {
+			should.exist(file);
+			should.exist(file.contents);
+			String(file.contents).should.equal(
+				fs.readFileSync('test/expected/04-name-true/foo.js', 'utf8')
+			);
+			done();
+		});
+
+		stream.write(new gutil.File({
+			base: 'test/fixtures',
+			cwd: 'test/',
+			path: 'test/fixtures/foo.xml',
+			contents: fs.readFileSync('test/fixtures/foo.xml')
+		}));
+	});
 });

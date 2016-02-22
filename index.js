@@ -27,16 +27,18 @@ module.exports = function (options) {
 		var name = opts.name;
 
 		if (name === true) {
-			name = file.stem;
+			// stem of the file
+			name = path.basename(file.path, path.extname(file.path));
 		}
 
-		var compiled = fest.compile(file.path, assign({}, opts.compile), name);
-		replaceExtension(compiled, file, cb);
-	}
+		try {
+			var compiled = fest.compile(file.path, assign({}, opts.compile), name);
+			file.contents = new Buffer(compiled);
+			file.path = gutil.replaceExtension(file.path, opts.ext);
+		} catch (e) {
+			return cb(new gutil.PluginError(PLUGIN_NAME, 'Compiling error', {showStack: true}));
+		}
 
-	function replaceExtension (output, file, cb) {
-		file.extname = opts.ext;
-		file.contents = new Buffer(output);
 		cb(null, file);
 	}
 
