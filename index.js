@@ -9,7 +9,7 @@ var assign = require('lodash.assign');
 var path = require('path');
 
 
-module.exports = function (options) {
+var plugin = function (options) {
 	var opts = assign({
 		require: 'fest',
 		ext: '.js'
@@ -44,3 +44,45 @@ module.exports = function (options) {
 
 	return through.obj(transform);
 };
+
+plugin.render = function (options) {
+	var opts = assign({
+		data: {},
+		render: {},
+		ext: '.html'
+	}, options);
+
+	if (typeof opts.data == 'string') {
+		try {
+			fs.accessSync(opts.data, fs.F_OK);
+
+			try {
+				jsonData = JSON.parse(fs.readFileSync(opts.data) + '');
+			} catch (e) {
+				return cb(new gutil.PluginError(PLUGIN_NAME, 'Data file parse error', {showStack: true}));
+			}
+		} catch (e) {
+			return cb(new gutil.PluginError(PLUGIN_NAME, 'Data file not found', {showStack: true}));
+		}
+	} else if (typeof opts.data == 'object') {
+		var jsonData = opts.data;
+	} else {
+		return cb(new gutil.PluginError(PLUGIN_NAME, 'Bad data param', {showStack: true}));
+	}
+
+	function render (file, enc, cb) {
+		try {
+			var rendered = fest.render(file.path, jsonData, opts.render) + '\n';
+			file.contents = rendered;
+			file.path = gutil.replaceExtension(file.path, opts.ext);
+		} catch (e) {
+			return cb(new gutil.PluginError(PLUGIN_NAME, 'Render error', {showStack: true}));
+		}
+
+		cb(null, file);
+	}
+
+	return through.obj(render);
+};
+
+module.exports = plugin;
