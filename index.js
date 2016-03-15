@@ -48,7 +48,6 @@ var plugin = function (options) {
 plugin.render = function (options) {
 	var opts = assign({
 		data: {},
-		render: {},
 		ext: '.html'
 	}, options);
 
@@ -72,7 +71,7 @@ plugin.render = function (options) {
 
 	function render (file, enc, cb) {
 		try {
-			var rendered = fest.render(file.path, jsonData, opts.render) + '\n';
+			var rendered = fest.render(file.path, jsonData, assign({}, opts.render)) + '\n';
 			file.contents = rendered;
 			file.path = gutil.replaceExtension(file.path, opts.ext);
 		} catch (e) {
