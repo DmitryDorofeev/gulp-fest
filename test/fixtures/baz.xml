@@ -1,6 +1,10 @@
-<fest:template xmlns:fest="http://fest.mail.ru">
-    <fest:get name="block">Grunt</fest:get>
-    <fest:set name="block">
-        Hello,<fest:space /><fest:value>params</fest:value>!
-    </fest:set>
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="json">
+	<h1>Hello<fest:if test="json.name">,<fest:space /><fest:value>json.name</fest:value></fest:if>!</h1>
+	<p>I had<fest:space /><fest:if test="json.subject"><fest:value>json.subject</fest:value></fest:if><br/>
+		That frightened me awake<br/>
+		I happened to escape<br/>
+		But my escape<br/>
+
+		Would never come
+	</p>
 </fest:template>

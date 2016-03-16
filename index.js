@@ -2,11 +2,12 @@
 
 var PLUGIN_NAME = 'gulp-fest';
 
-var fest = require('fest');
-var through = require('through2');
-var gutil = require('gulp-util');
 var assign = require('lodash.assign');
+var fest = require('fest');
+var fs = require('fs');
+var gutil = require('gulp-util');
 var path = require('path');
+var through = require('through2');
 
 
 var plugin = function (options) {
@@ -51,28 +52,24 @@ plugin.render = function (options) {
 		ext: '.html'
 	}, options);
 
-	if (typeof opts.data == 'string') {
-		try {
-			fs.accessSync(opts.data, fs.F_OK);
+	function render (file, enc, cb) {
+		var json = {};
 
+		if (typeof opts.data == 'string') {
 			try {
-				jsonData = JSON.parse(fs.readFileSync(opts.data) + '');
+				json = JSON.parse(fs.readFileSync(opts.data));
 			} catch (e) {
 				return cb(new gutil.PluginError(PLUGIN_NAME, 'Data file parse error', {showStack: true}));
 			}
-		} catch (e) {
-			return cb(new gutil.PluginError(PLUGIN_NAME, 'Data file not found', {showStack: true}));
+		} else if (typeof opts.data == 'object') {
+			json = opts.data;
+		} else {
+			return cb(new gutil.PluginError(PLUGIN_NAME, 'Bad data param', {showStack: true}));
 		}
-	} else if (typeof opts.data == 'object') {
-		var jsonData = opts.data;
-	} else {
-		return cb(new gutil.PluginError(PLUGIN_NAME, 'Bad data param', {showStack: true}));
-	}
 
-	function render (file, enc, cb) {
 		try {
-			var rendered = fest.render(file.path, jsonData, assign({}, opts.render)) + '\n';
-			file.contents = rendered;
+			var template = (new Function('return ' + file.contents.toString()))();
+			file.contents = new Buffer(template(json));
 			file.path = gutil.replaceExtension(file.path, opts.ext);
 		} catch (e) {
 			return cb(new gutil.PluginError(PLUGIN_NAME, 'Render error', {showStack: true}));
