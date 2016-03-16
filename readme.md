@@ -18,7 +18,7 @@ var gulp = require('gulp');
 gulp.task('default', function () {
 	return gulp.src('src/*.xml')
 		.pipe(fest())
-		.pipe(gulp.dest('.tmp'));
+		.pipe(gulp.dest('.tmp'))
 		.pipe(fest.render({
 			data: {
 				foo: 'bar'
