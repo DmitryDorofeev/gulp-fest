@@ -46,30 +46,25 @@ var plugin = function (options) {
 	return through.obj(transform);
 };
 
-plugin.render = function (options) {
+plugin.render = function (data, options) {
 	var opts = assign({
-		data: {},
 		ext: '.html'
 	}, options);
 
 	function render (file, enc, cb) {
-		var json = {};
-
-		if (typeof opts.data == 'string') {
+		if (typeof data == 'string') {
 			try {
-				json = JSON.parse(fs.readFileSync(opts.data));
+				data = JSON.parse(fs.readFileSync(data));
 			} catch (e) {
 				return cb(new gutil.PluginError(PLUGIN_NAME, 'Data file parse error', {showStack: true}));
 			}
-		} else if (typeof opts.data == 'object') {
-			json = opts.data;
-		} else {
-			return cb(new gutil.PluginError(PLUGIN_NAME, 'Bad data param', {showStack: true}));
+		} else if (typeof data != 'object') {
+			return cb(new gutil.PluginError(PLUGIN_NAME, 'Bad data parameter', {showStack: true}));
 		}
 
 		try {
 			var template = (new Function('return ' + file.contents.toString()))();
-			file.contents = new Buffer(template(json));
+			file.contents = new Buffer(template(data));
 			file.path = gutil.replaceExtension(file.path, opts.ext);
 		} catch (e) {
 			return cb(new gutil.PluginError(PLUGIN_NAME, 'Render error', {showStack: true}));

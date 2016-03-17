@@ -151,10 +151,8 @@ describe('gulp-fest', function() {
 
 	it('should render template to HTML', function (done) {
 		var stream = fest.render({
-			data: {
-				name: 'Deerhunter',
-				subject: 'dreams'
-			}
+			name: 'Deerhunter',
+			subject: 'dreams'
 		});
 
 		stream.on('data', function (file) {
@@ -175,8 +173,7 @@ describe('gulp-fest', function() {
 	});
 
 	it('should read JSON from file while rendering and use custom extension also', function (done) {
-		var stream = fest.render({
-			data: 'test/fixtures/baz.json',
+		var stream = fest.render('test/fixtures/baz.json', {
 			ext: '.htm'
 		});
 
