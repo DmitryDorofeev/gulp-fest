@@ -1,6 +1,6 @@
-# gulp-fest
+# gulp-fest [![Build Status](https://travis-ci.org/DmitryDorofeev/gulp-fest.svg?branch=master)](https://travis-ci.org/DmitryDorofeev/gulp-fest)
 
-Gulp plugin for compiling [fest](https://github.com/mailru/fest) templates
+Gulp plugin for compiling and rendering [fest](https://github.com/mailru/fest) templates
 
 ## Install
 
