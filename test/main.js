@@ -1,9 +1,10 @@
 'use strict';
 
-var fs = require('fs');
-var should = require('should');
 var fest = require('../');
+var fs = require('fs');
 var gutil = require('gulp-util');
+var path = require('path');
+var should = require('should');
 
 require('mocha');
 
@@ -145,6 +146,52 @@ describe('gulp-fest', function() {
 			cwd: 'test/',
 			path: 'test/fixtures/foo.xml',
 			contents: fs.readFileSync('test/fixtures/foo.xml')
+		}));
+	});
+
+	it('should render template to HTML', function (done) {
+		var stream = fest.render({
+			name: 'Deerhunter',
+			subject: 'dreams'
+		});
+
+		stream.on('data', function (file) {
+			should.exist(file);
+			should.exist(file.contents);
+			String(file.contents).should.equal(
+				fs.readFileSync('test/expected/07-render/baz.html', 'utf8')
+			);
+			done();
+		});
+
+		stream.write(new gutil.File({
+			base: 'test/fixtures',
+			cwd: 'test/',
+			path: 'test/fixtures/baz.js',
+			contents: fs.readFileSync('test/fixtures/baz.js')
+		}));
+	});
+
+	it('should read JSON from file while rendering and use custom extension also', function (done) {
+		var stream = fest.render('test/fixtures/baz.json', {
+			ext: '.htm'
+		});
+
+		stream.on('data', function (file) {
+			should.exist(file);
+			should.exist(file.contents);
+			String(file.contents).should.equal(
+				fs.readFileSync('test/expected/08-render-using-json/baz.htm', 'utf8')
+			);
+			path.extname(file.path) == '.htm';
+			done();
+		});
+
+		stream.write(new gutil.File({
+			base: 'test/fixtures',
+			cwd: 'test/',
+			path: 'test/fixtures/baz.js',
+			contents: fs.readFileSync('test/fixtures/baz.js')
 		}));
 	});
 });

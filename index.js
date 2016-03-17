@@ -2,14 +2,15 @@
 
 var PLUGIN_NAME = 'gulp-fest';
 
-var fest = require('fest');
-var through = require('through2');
-var gutil = require('gulp-util');
 var assign = require('lodash.assign');
+var fest = require('fest');
+var fs = require('fs');
+var gutil = require('gulp-util');
 var path = require('path');
+var through = require('through2');
 
 
-module.exports = function (options) {
+var plugin = function (options) {
 	var opts = assign({
 		require: 'fest',
 		ext: '.js'
@@ -44,3 +45,35 @@ module.exports = function (options) {
 
 	return through.obj(transform);
 };
+
+plugin.render = function (data, options) {
+	var opts = assign({
+		ext: '.html'
+	}, options);
+
+	function render (file, enc, cb) {
+		if (typeof data == 'string') {
+			try {
+				data = JSON.parse(fs.readFileSync(data));
+			} catch (e) {
+				return cb(new gutil.PluginError(PLUGIN_NAME, 'Data file parse error', {showStack: true}));
+			}
+		} else if (typeof data != 'object') {
+			return cb(new gutil.PluginError(PLUGIN_NAME, 'Bad data parameter', {showStack: true}));
+		}
+
+		try {
+			var template = (new Function('return ' + file.contents.toString()))();
+			file.contents = new Buffer(template(data));
+			file.path = gutil.replaceExtension(file.path, opts.ext);
+		} catch (e) {
+			return cb(new gutil.PluginError(PLUGIN_NAME, 'Render error', {showStack: true}));
+		}
+
+		cb(null, file);
+	}
+
+	return through.obj(render);
+};
+
+module.exports = plugin;
