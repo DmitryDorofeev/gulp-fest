@@ -37,7 +37,7 @@ var plugin = function (options) {
 			file.contents = new Buffer(compiled);
 			file.path = gutil.replaceExtension(file.path, opts.ext);
 		} catch (e) {
-			return cb(new gutil.PluginError(PLUGIN_NAME, 'Compiling error', {showStack: true}));
+			return cb(new gutil.PluginError(PLUGIN_NAME, 'Compiling error:\n' + e.toString()));
 		}
 
 		cb(null, file);
@@ -67,7 +67,7 @@ plugin.render = function (data, options) {
 			file.contents = new Buffer(template(data));
 			file.path = gutil.replaceExtension(file.path, opts.ext);
 		} catch (e) {
-			return cb(new gutil.PluginError(PLUGIN_NAME, 'Render error', {showStack: true}));
+			return cb(new gutil.PluginError(PLUGIN_NAME, 'Render error:\n' + e.toString()));
 		}
 
 		cb(null, file);
