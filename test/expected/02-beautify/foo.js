@@ -50,6 +50,9 @@ function(__fest_context) {
             "<": "\\u003C",
             ">": "\\u003E"
         },
+        i18n = __fest_self && typeof __fest_self.i18n === "function" ? __fest_self.i18n : function(str) {
+            return str;
+        },
         ___fest_log_error;
     if (typeof __fest_error === "undefined") {
         ___fest_log_error = (typeof console !== "undefined" && console.error) ?
