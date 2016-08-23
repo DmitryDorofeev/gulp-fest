@@ -33,7 +33,7 @@ var plugin = function (options) {
 		}
 
 		try {
-			var compiled = fest.compile(file.path, assign({}, opts.compile), name);
+			var compiled = fest.compile(file, assign({}, opts.compile), name);
 			file.contents = new Buffer(compiled);
 			file.path = gutil.replaceExtension(file.path, opts.ext);
 		} catch (e) {
