@@ -47,7 +47,8 @@ Default:
 	ext: '.js',			// extension of result file
 	compile: {			// fest.compile options
 		beautify: false,
-		debug: false
+		debug: false,
+		std: false
 	}
 }
 ```

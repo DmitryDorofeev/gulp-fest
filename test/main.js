@@ -15,9 +15,7 @@ describe('gulp-fest', function() {
 		stream.on('data', function (file) {
 			should.exist(file);
 			should.exist(file.contents);
-			String(file.contents).should.equal(
-				fs.readFileSync('test/expected/01-default/foo.js', 'utf8')
-			);
+			should((file.contents + '').split('\n').length).equal(30);
 			done();
 		});
 
@@ -38,11 +36,7 @@ describe('gulp-fest', function() {
 		});
 
 		stream.on('data', function (file) {
-			should.exist(file);
-			should.exist(file.contents);
-			String(file.contents).should.equal(
-				fs.readFileSync('test/expected/02-beautify/foo.js', 'utf8')
-			);
+			should((file.contents + '').split('\n').length > 30).be.ok();
 			done();
 		});
 
@@ -64,11 +58,17 @@ describe('gulp-fest', function() {
 		});
 
 		stream.on('data', function (file) {
-			should.exist(file);
-			should.exist(file.contents);
-			String(file.contents).should.equal(
-				fs.readFileSync('test/expected/03-debug/foo.js', 'utf8')
-			);
+			[
+				'__fest_debug_file = "test\/fixtures\/foo.xml";',
+				'__fest_debug_line = "0";',
+				'__fest_debug_block = "fest:template";',
+				'__fest_debug_file = "test\/fixtures\/foo.xml";',
+				'__fest_debug_line = "1";',
+				'__fest_debug_block = "h1";'
+			].forEach(str => {
+				should((file.contents + '').indexOf(str)).be.ok();
+			});
+
 			done();
 		});
 
@@ -87,11 +87,8 @@ describe('gulp-fest', function() {
 		});
 
 		stream.on('data', function (file) {
-			should.exist(file);
-			should.exist(file.contents);
-			String(file.contents).should.equal(
-				fs.readFileSync('test/expected/04-name-true/foo.js', 'utf8')
-			);
+			var start = 'var foo = function (__fest_context)';
+			String(file.contents).substr(0, start.length).should.equal(start);
 			done();
 		});
 
@@ -110,11 +107,8 @@ describe('gulp-fest', function() {
 		});
 
 		stream.on('data', function (file) {
-			should.exist(file);
-			should.exist(file.contents);
-			String(file.contents).should.equal(
-				fs.readFileSync('test/expected/05-custom-name/foo.js', 'utf8')
-			);
+			var start = 'var someFuncName = function (__fest_context)';
+			String(file.contents).substr(0, start.length).should.equal(start);
 			done();
 		});
 
@@ -133,11 +127,7 @@ describe('gulp-fest', function() {
 		});
 
 		stream.on('data', function (file) {
-			should.exist(file);
-			should.exist(file.contents);
-			String(file.contents).should.equal(
-				fs.readFileSync('test/expected/06-custom-extension/foo.tmpl.js', 'utf8')
-			);
+			file.path.should.equal('test/fixtures/footmpl.js');
 			done();
 		});
 
@@ -156,10 +146,8 @@ describe('gulp-fest', function() {
 		});
 
 		stream.on('data', function (file) {
-			should.exist(file);
-			should.exist(file.contents);
 			String(file.contents).should.equal(
-				fs.readFileSync('test/expected/07-render/baz.html', 'utf8')
+				fs.readFileSync('test/expected/render/baz.html', 'utf8')
 			);
 			done();
 		});
@@ -178,12 +166,10 @@ describe('gulp-fest', function() {
 		});
 
 		stream.on('data', function (file) {
-			should.exist(file);
-			should.exist(file.contents);
 			String(file.contents).should.equal(
-				fs.readFileSync('test/expected/08-render-using-json/baz.htm', 'utf8')
+				fs.readFileSync('test/expected/render-using-json/baz.htm', 'utf8')
 			);
-			path.extname(file.path) == '.htm';
+			path.extname(file.path).should.equal('.htm');
 			done();
 		});
 
