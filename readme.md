@@ -39,13 +39,15 @@ Type: `object`
 Default:
 ```js
 {
-	require: 'fest',	// path to fest module
-	name: undefined,	// name of result function,
-						// if `true` it is a stem of the template,
-						// if `string` it is a name
-						// if undefined it will result to anonymous function
-	ext: '.js',			// extension of result file
-	compile: {			// fest.compile options
+	require: 'fest',		// path to fest module
+	name: undefined,		// name of result function,
+							// if `true` it is a stem of the template,
+							// if `string` it is a name
+							// if undefined it will result to anonymous function
+	decloration: undefined,	// use with `name` property, for decloration function by expression `function name(){}`
+							// set `true` for enable option
+	ext: '.js',				// extension of result file
+	compile: {				// fest.compile options
 		beautify: false,
 		debug: false,
 		std: false

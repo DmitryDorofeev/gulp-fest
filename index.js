@@ -26,6 +26,7 @@ var plugin = function (options) {
 		}
 
 		var name = opts.name;
+		var declaration = opts.declaration;
 
 		if (name === true) {
 			// stem of the file
@@ -38,7 +39,9 @@ var plugin = function (options) {
 				assign({}, opts.compile)
 			);
 
-			if (name) {
+			if (name && declaration) {
+				compiled = compiled.replace(/^function /, 'function ' + name);
+			} else if (name) {
 				compiled = 'var ' + name + ' = ' + compiled;
 			}
 
