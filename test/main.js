@@ -81,7 +81,7 @@ describe('gulp-fest', function() {
 	});
 
 
-	it('should create function declaration with name of file stem', function (done) {
+	it('should create function declaration in variable with name of file stem', function (done) {
 		var stream = fest({
 			name: true
 		});
@@ -101,13 +101,54 @@ describe('gulp-fest', function() {
 	});
 
 
-	it('should create function declaration with \'name\' param', function (done) {
+	it('should create function declaration in variable with \'name\' param', function (done) {
 		var stream = fest({
 			name: 'someFuncName'
 		});
 
 		stream.on('data', function (file) {
 			var start = 'var someFuncName = function (__fest_context)';
+			String(file.contents).substr(0, start.length).should.equal(start);
+			done();
+		});
+
+		stream.write(new gutil.File({
+			base: 'test/fixtures',
+			cwd: 'test/',
+			path: 'test/fixtures/foo.xml',
+			contents: fs.readFileSync('test/fixtures/foo.xml')
+		}));
+	});
+
+	it('should create function declaration with name of file stem', function (done) {
+		var stream = fest({
+			name: true,
+			declaration: true
+		});
+
+		stream.on('data', function (file) {
+			var start = 'function foo(__fest_context)';
+			String(file.contents).substr(0, start.length).should.equal(start);
+			done();
+		});
+
+		stream.write(new gutil.File({
+			base: 'test/fixtures',
+			cwd: 'test/',
+			path: 'test/fixtures/foo.xml',
+			contents: fs.readFileSync('test/fixtures/foo.xml')
+		}));
+	});
+
+
+	it('should create function declaration with \'name\' param', function (done) {
+		var stream = fest({
+			name: 'someFuncName',
+			declaration: true
+		});
+
+		stream.on('data', function (file) {
+			var start = 'function someFuncName(__fest_context)';
 			String(file.contents).substr(0, start.length).should.equal(start);
 			done();
 		});
